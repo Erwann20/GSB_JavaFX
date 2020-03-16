@@ -76,6 +76,13 @@ public class ListePraticiens {
 		      	alert.setContentText("Veuillez saisir une valeur");
 		      	alert.showAndWait();
 		      	break;
+			case(415):
+				alert = new Alert(AlertType.INFORMATION);
+		      	alert.setTitle("Requête vide");
+		      	alert.setHeaderText("Aucun praticien");
+		      	alert.setContentText("pas de praticien attribuer à ce visiteur");
+		      	alert.showAndWait();
+		      	break;
 		      	
 		}
 				

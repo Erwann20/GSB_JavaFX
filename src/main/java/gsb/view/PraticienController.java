@@ -3,6 +3,9 @@ package gsb.view;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import gsb.MainApp;
@@ -93,7 +96,20 @@ public class PraticienController implements Controller{
 		  // Show save file dialog
 		File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 		
-		FileWriter csvWriter = new FileWriter(file.getPath());
+	
+		
+		 // Get a Calendar and set it to the current time.
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(Date.from(Instant.now()));
+		
+		String dateNameFile = String.format("file-%1$tY-%1$tm-%1$td-%1$tk-%1$tS-%1$tp", cal);
+		
+		String absolutePath = file.getAbsolutePath();
+		String filePath = absolutePath.substring(0,absolutePath.lastIndexOf(File.separator))+ "\\" + dateNameFile + file.getName();
+
+		
+		FileWriter csvWriter = new FileWriter(filePath);
+		
 		
 		for (Praticien toto : this.tableView.getItems()) {
 			csvWriter.append("Nom praticien");
