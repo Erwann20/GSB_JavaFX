@@ -69,6 +69,7 @@ public class MainApp extends Application {
 	            // Donne l'accès au contrôleur par l'application main.
 	            Controller controleur = loader.getController();
 	            controleur.setMainApp(this);
+	            
 	            this.primaryStage.setTitle(TITRE + controleur.getNOMMETHODE());
 	            
 	        } catch (IOException e) {
@@ -78,6 +79,16 @@ public class MainApp extends Application {
 	 
 	 
 	 
+	 
+	 
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
+	public void setPrimaryStage(Stage primaryStage) {
+		this.primaryStage = primaryStage;
+	}
+
 	public ListePraticiens getLesPraticiens() {
 		return lesPraticiens;
 	}

@@ -10,7 +10,7 @@ public class MainTest {
 		ListePraticiens test = new ListePraticiens();
 		
 
-		System.out.println(test.getListePraticienWithVisiteurName("Jean"));
+		System.out.println(test.getListePraticienWithVisiteurName("dzdzdz"));
 		
 		
 	}
