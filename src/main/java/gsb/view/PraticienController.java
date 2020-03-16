@@ -1,72 +1,125 @@
 package gsb.view;
 
-import java.awt.TextArea;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import gsb.MainApp;
-import gsb.model.ListePraticiens;
+import gsb.model.Praticien;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import javafx.scene.control.Button;
+import javafx.stage.FileChooser;
 
+/**
+ * 	
+ * @author erwann
+ *
+ */
 public class PraticienController implements Controller{
 	
-	MainApp mainApp;
+	private MainApp mainApp;
 	@FXML
-	Text content;
-	@FXML
-	TextField nameVisitor;
-	ListePraticiens test;
+	private TextField nameVisitor;
 	
+	@FXML
+	private TableView<Praticien> tableView;
+	@FXML
+	private TableColumn<Praticien, String> columNom_Praticien;
+	@FXML
+	private TableColumn<Praticien, String> columPrenom_Praticien;
+	@FXML
+	private TableColumn<Praticien, String> columNom_visiteur;
+	@FXML
+	private TableColumn<Praticien, String> columPrenom_visiteur;	
+	@FXML
+	private Button buttonCsv;
+	private ObservableList<Praticien> praticienData = FXCollections.observableArrayList();
 
+    
 	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-		
+		this.mainApp = mainApp;	
+		this.buttonCsv.setVisible(false);
 	}
 	
 	@FXML
-	public void initText() {
-		String reqHttp = this.mainApp.getLesPraticiens().getPraticienWithVisiteur(this.nameVisitor.getText());
+	public void initData() {
+		List<Praticien> reqHttp = this.mainApp.getLesPraticiens().getListePraticienWithVisiteurName(this.nameVisitor.getText());
+
+		if (!(reqHttp == null) ){
+			for(Praticien unPra: reqHttp) {
 		
-		if (this.nameVisitor.getText().isEmpty()) {
-			this.content.setText("veuillez saisir une valeur");
+				this.praticienData.add(unPra);
+				this.buttonCsv.setVisible(true);
+			}
 		} else {
-			content.setText(reqHttp);
+			this.buttonCsv.setVisible(false);
+			this.tableView.getItems().clear();
 		}
+			
+			this.tableView.setItems(praticienData);
+			
+			this.columNom_Praticien.setCellValueFactory(cellData -> cellData.getValue().getNom_PraticienProperty());
+			this.columPrenom_Praticien.setCellValueFactory(cellData -> cellData.getValue().getPrenom_PraticienProperty());
+			this.columNom_visiteur.setCellValueFactory(cellData -> cellData.getValue().getNom_visiteurProperty());
+			this.columPrenom_visiteur.setCellValueFactory(cellData -> cellData.getValue().getPrenom_visiteurProperty());
 		
+			
 	}
+		
+	
+		
+		
+	
 	
 	
 	@FXML
 	public void exportCSV() throws IOException {
-		// Our example data
-		@SuppressWarnings("unchecked")
-		List<List<String>> rows = Arrays.asList(
-		    Arrays.asList("Jean", "author", "Java"),
-		    Arrays.asList("David", "editor", "Python"),
-		    Arrays.asList("Scott", "editor", "Node.js")
-		);
-
-		FileWriter csvWriter = new FileWriter("new.csv");
-		csvWriter.append("Name");
-		csvWriter.append(",");
-		csvWriter.append("Role");
-		csvWriter.append(",");
-		csvWriter.append("Topic");
-		csvWriter.append("\n");
-
-		for (List<String> rowData : rows) {
-		    csvWriter.append(String.join(",", rowData));
+		
+		FileChooser fileChooser = new FileChooser();
+		
+		  // Set extension filter
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+		          "CSV files (*.csv)", "*.csv");
+		  
+		fileChooser.getExtensionFilters().add(extFilter);
+		 
+		fileChooser.getExtensionFilters().add(extFilter);
+		  // Show save file dialog
+		File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+		
+		FileWriter csvWriter = new FileWriter(file.getPath());
+		
+		for (Praticien toto : this.tableView.getItems()) {
+			csvWriter.append("Nom praticien");
+			csvWriter.append(",");
+		    csvWriter.append(toto.getNom_Praticien());
+		    csvWriter.append("\n");
+		    csvWriter.append("Prenom praticien");
+			csvWriter.append(",");
+		    csvWriter.append(toto.getPrenom_Praticien());
+		    csvWriter.append("\n");
+		    csvWriter.append("Nom visiteur");
+			csvWriter.append(",");
+		    csvWriter.append(toto.getNom_visiteur());
+		    csvWriter.append("\n");
+		    csvWriter.append("Prenom visiteur");
+			csvWriter.append(",");
+		    csvWriter.append(toto.getPrenom_visiteur());
+		    csvWriter.append("\n");
 		    csvWriter.append("\n");
 		}
-
+		
 		csvWriter.flush();
 		csvWriter.close();
-		
+
 	}
+	
 	public String getNOMMETHODE() {
 		// TODO Auto-generated method stub
 		return " liste des praticiens";

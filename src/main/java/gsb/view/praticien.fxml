@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gsb.view.PraticienController">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gsb.view.PraticienController">
    <children>
-      <Text fx:id="content" layoutX="53.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="694.1366882324219" />
       <Text layoutX="73.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Visiteur: " />
       <TextField fx:id="nameVisitor" layoutX="165.0" layoutY="55.0" />
-      <Button layoutX="348.0" layoutY="55.0" mnemonicParsing="false" onAction="#initText" text="Button" />
-      <Button layoutX="570.0" layoutY="196.0" mnemonicParsing="false" text="export CSV" />
+      <Button layoutX="348.0" layoutY="55.0" mnemonicParsing="false" onAction="#initData" text="Rechercher" />
+      <Button fx:id="buttonCsv" layoutX="579.0" layoutY="264.0" mnemonicParsing="false" onAction="#exportCSV" text="export CSV" />
+      <TableView fx:id="tableView" layoutX="65.0" layoutY="125.0" prefHeight="199.0" prefWidth="439.0">
+        <columns>
+          <TableColumn fx:id="columNom_Praticien" prefWidth="110.39999008178711" text="Nom_Praticien" />
+          <TableColumn fx:id="columPrenom_Praticien" prefWidth="108.00001525878906" text="Prenom_Praticien" />
+            <TableColumn fx:id="columNom_visiteur" minWidth="4.0" prefWidth="115.20001220703125" text="Nom_visiteur" />
+            <TableColumn fx:id="columPrenom_visiteur" prefWidth="101.5999755859375" text="Prenom_visiteur" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
