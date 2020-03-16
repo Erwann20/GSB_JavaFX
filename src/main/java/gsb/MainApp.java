@@ -2,6 +2,7 @@ package gsb;
 
 import java.io.IOException;
 
+import gsb.model.ListeConditionnement;
 import gsb.model.ListePraticiens;
 import gsb.view.Controller;
 import gsb.view.PrincipalContoller;
@@ -18,11 +19,13 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane principal;
-    ListePraticiens lesPraticiens;
+    private ListePraticiens lesPraticiens;
+    private ListeConditionnement lesConditionnements;
     
     
     public MainApp() {
     	this.lesPraticiens = new ListePraticiens();
+    	this.lesConditionnements = new ListeConditionnement();
     }
     
 	@Override
@@ -81,6 +84,10 @@ public class MainApp extends Application {
 	 
 	 
 	 
+	public ListeConditionnement getLesConditionnements() {
+		return lesConditionnements;
+	}
+
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}

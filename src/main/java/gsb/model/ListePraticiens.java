@@ -13,9 +13,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class ListePraticiens {
-	Client client;
-	WebTarget target;
-	Response response;
+	private Client client;
+	private WebTarget target;
+	private Response response;
 	
 	public ListePraticiens() {
 

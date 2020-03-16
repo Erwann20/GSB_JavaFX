@@ -5,14 +5,14 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gsb.view.PrincipalContoller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#listepraticien" text="praticien" />
+              <MenuItem mnemonicParsing="false" onAction="#listepraticien" text="Praticien" />
+                  <MenuItem mnemonicParsing="false" onAction="#listeConditionnement" text="Conditionnement" />
             </items>
           </Menu>
         </menus>

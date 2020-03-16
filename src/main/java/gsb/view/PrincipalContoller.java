@@ -13,7 +13,12 @@ public class PrincipalContoller {
 	
 	@FXML
 	public void listepraticien() {
-		this.mainApp.afficheVue("view/praticien.fxml");
+		this.mainApp.afficheVue("view/VuePraticiens.fxml");
+	}
+	
+	@FXML
+	public void listeConditionnement() {
+		this.mainApp.afficheVue("view/VueConditionnement.fxml");
 	}
 	
 	
