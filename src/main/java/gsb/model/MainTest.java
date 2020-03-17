@@ -9,8 +9,12 @@ public class MainTest {
 	public static void main(String[] args) {
 		ListePraticiens test = new ListePraticiens();
 		
-
-		System.out.println(test.getListePraticienWithVisiteurName("dzdzdz"));
+//
+//		System.out.println(test.getListePraticienWithVisiteurName("dzdzdz"));
+//		
+		ListeConditionnement toto = new ListeConditionnement();
+		
+		System.out.println(toto.getListeConditionnementWithVisiteurName("Notini").get(0).getMed_nomcommerciale());
 		
 		
 	}

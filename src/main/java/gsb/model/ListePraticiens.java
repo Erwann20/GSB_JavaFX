@@ -13,9 +13,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class ListePraticiens {
-	Client client;
-	WebTarget target;
-	Response response;
+	private Client client;
+	private WebTarget target;
+	private Response response;
 	
 	public ListePraticiens() {
 
@@ -74,6 +74,13 @@ public class ListePraticiens {
 		      	alert.setTitle("Erreur saisie");
 		      	alert.setHeaderText("Erreur saisie");
 		      	alert.setContentText("Veuillez saisir une valeur");
+		      	alert.showAndWait();
+		      	break;
+			case(415):
+				alert = new Alert(AlertType.INFORMATION);
+		      	alert.setTitle("Requête vide");
+		      	alert.setHeaderText("Aucun praticien");
+		      	alert.setContentText("pas de praticien attribuer à ce visiteur");
 		      	alert.showAndWait();
 		      	break;
 		      	
