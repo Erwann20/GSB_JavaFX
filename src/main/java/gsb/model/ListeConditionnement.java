@@ -46,7 +46,7 @@ public class ListeConditionnement {
 		      	alert.setContentText("Veuillez saisir une valeur");
 		      	alert.showAndWait();
 		      	break;
-			case(435):
+			case(434):
 				alert = new Alert(AlertType.INFORMATION);
 		      	alert.setTitle("Requête vide");
 		      	alert.setHeaderText("Aucun rapport effectué");

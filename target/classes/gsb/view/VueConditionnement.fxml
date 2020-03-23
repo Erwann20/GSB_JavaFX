@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gsb.view.ConditionnementController">
+<AnchorPane prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gsb.view.ConditionnementController">
    <children>
       <Text layoutX="73.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Visiteur: " />
       <Button layoutX="348.0" layoutY="55.0" mnemonicParsing="false" onAction="#initData" text="Rechercher" />
-      <TableView fx:id="tableView" layoutX="7.0" layoutY="131.0" prefHeight="215.0" prefWidth="486.0">
+      <TableView fx:id="tableView" layoutX="45.0" layoutY="132.0" prefHeight="215.0" prefWidth="486.0">
         <columns>
           <TableColumn fx:id="columMed_depotlegale" prefWidth="75.0" text="Depot legal" />
           <TableColumn fx:id="columMed_nomcommerciale" prefWidth="106.39996337890625" text="Nom Commercial" />
