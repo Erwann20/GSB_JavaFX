@@ -16,6 +16,7 @@ public class ListePraticiens {
 	private Client client;
 	private WebTarget target;
 	private Response response;
+	private Integer status;
 	
 	public ListePraticiens() {
 
@@ -55,39 +56,35 @@ public class ListePraticiens {
 		List<Praticien> result= null;
 		this.client = ClientBuilder.newClient();
 		this.target = client.target("http://127.0.0.1:8000/api/visiteur/"+nameVisiteur);
-		
-		
+				
 		switch(this.target.request().get().getStatus()) {
 			case (200):
 				result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Praticien>>() {
+					
 				});
+				this.status = this.target.request().get().getStatus();
 				break;
 			case(416):
-				Alert alert = new Alert(AlertType.INFORMATION);
-		      	alert.setTitle("Erreur valeur");
-		      	alert.setHeaderText("Erreur valeur");
-		      	alert.setContentText("Le nom du visiteur ("+ nameVisiteur + ") n'existe pas");
-		      	alert.showAndWait();
+		      	this.status = this.target.request().get().getStatus();
 		      	break;
 			case(500):
-				alert = new Alert(AlertType.INFORMATION);
-		      	alert.setTitle("Erreur saisie");
-		      	alert.setHeaderText("Erreur saisie");
-		      	alert.setContentText("Veuillez saisir une valeur");
-		      	alert.showAndWait();
+				this.status = this.target.request().get().getStatus();
 		      	break;
 			case(415):
-				alert = new Alert(AlertType.INFORMATION);
-		      	alert.setTitle("Requête vide");
-		      	alert.setHeaderText("Aucun praticien");
-		      	alert.setContentText("pas de praticien attribuer à ce visiteur");
-		      	alert.showAndWait();
+				this.status = this.target.request().get().getStatus();
 		      	break;
+		    
 		      	
 		}
 				
 		return result;
 		
 	}
+
+	public Integer getStatus() {
+		return status;
+	}
+	
+	
 
 }

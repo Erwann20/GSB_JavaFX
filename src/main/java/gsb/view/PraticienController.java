@@ -10,14 +10,23 @@ import java.util.List;
 
 import gsb.MainApp;
 import gsb.model.Praticien;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 /**
  * 	
@@ -42,36 +51,97 @@ public class PraticienController implements Controller{
 	private TableColumn<Praticien, String> columPrenom_visiteur;	
 	@FXML
 	private Button buttonCsv;
+	@FXML
+	private Button buttonConfirm;
+	@FXML
+	private TextArea detailVisit; 
+	@FXML
+	private ProgressBar loader; 
+	
 	private ObservableList<Praticien> praticienData = FXCollections.observableArrayList();
 
     
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;	
 		this.buttonCsv.setVisible(false);
-	}
+		
+		this.loader.setProgress(0);
+		
 	
-	@FXML
+		this.buttonConfirm.setOnAction((ActionEvent e) -> {
+			  Timeline task = new Timeline(
+				        new KeyFrame(
+				                Duration.ZERO,       
+				                new KeyValue(this.loader.progressProperty(), 0)
+				        ),
+				        new KeyFrame(
+				                Duration.seconds(2), 
+				                new KeyValue(this.loader.progressProperty(), 1)
+				        )
+					  );  
+			  task.setOnFinished(event -> {
+				  initData();
+			  });
+			  
+			  task.playFromStart();
+			 
+		});
+		
+		
+	}
+
+	
 	public void initData() {
 		List<Praticien> reqHttp = this.mainApp.getLesPraticiens().getListePraticienWithVisiteurName(this.nameVisitor.getText());
 
+		switch(this.mainApp.getLesPraticiens().getStatus()) {
+		case(416):
+			Alert alert = new Alert(AlertType.INFORMATION);
+	      	alert.setTitle("Erreur valeur");
+	      	alert.setHeaderText("Erreur valeur");
+	      	alert.setContentText("Le nom du visiteur ("+ this.nameVisitor.getText() + ") n'existe pas");
+	      	alert.show();
+	      	break;
+		case(500):
+			alert = new Alert(AlertType.INFORMATION);
+	      	alert.setTitle("Erreur saisie");
+	      	alert.setHeaderText("Erreur saisie");
+	      	alert.setContentText("Veuillez saisir une valeur");
+	      	alert.show();
+	      	break;
+		case(415):
+			alert = new Alert(AlertType.INFORMATION);
+	      	alert.setTitle("Requête vide");
+	      	alert.setHeaderText("Aucun praticien");
+	      	alert.setContentText("pas de praticien attribuer à ce visiteur");
+	      	alert.show();
+	      	break;
+	      	
+	}
+		
 		if (!(reqHttp == null) ){
 			for(Praticien unPra: reqHttp) {
-		
+				
+				this.detailVisit.setText("Detail du visiteur: \n"+
+										  "Nom :" + unPra.getNom_visiteur() + "\n" +
+										  "Prenom :" + unPra.getPrenom_visiteur());
 				this.praticienData.add(unPra);
 				this.buttonCsv.setVisible(true);
+				
 			}
 		} else {
 			this.buttonCsv.setVisible(false);
 			this.tableView.getItems().clear();
 		}
 			
+		
+		 
+		
 			this.tableView.setItems(praticienData);
 			
 			this.columNom_Praticien.setCellValueFactory(cellData -> cellData.getValue().getNom_PraticienProperty());
 			this.columPrenom_Praticien.setCellValueFactory(cellData -> cellData.getValue().getPrenom_PraticienProperty());
-			this.columNom_visiteur.setCellValueFactory(cellData -> cellData.getValue().getNom_visiteurProperty());
-			this.columPrenom_visiteur.setCellValueFactory(cellData -> cellData.getValue().getPrenom_visiteurProperty());
-		
+
 			
 	}
 		
