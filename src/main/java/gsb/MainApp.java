@@ -2,8 +2,9 @@ package gsb;
 
 import java.io.IOException;
 
-import gsb.model.ListeConditionnement;
-import gsb.model.ListePraticiens;
+import gsb.model.ListConditionnement;
+import gsb.model.ListPraticien;
+import gsb.model.ListPraticienWithVisiteur;
 import gsb.view.Controller;
 import gsb.view.PrincipalContoller;
 import javafx.application.Application;
@@ -19,13 +20,14 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane principal;
-    private ListePraticiens lesPraticiens;
-    private ListeConditionnement lesConditionnements;
-    
+    private ListPraticienWithVisiteur lesPraticiensWithVisiteur;
+    private ListConditionnement lesConditionnements;
+    private ListPraticien lesPraticien;
     
     public MainApp() {
-    	this.lesPraticiens = new ListePraticiens();
-    	this.lesConditionnements = new ListeConditionnement();
+    	this.lesPraticiensWithVisiteur = new ListPraticienWithVisiteur();
+    	this.lesConditionnements = new ListConditionnement();
+    	this.setLesPraticien(new ListPraticien());
     }
     
 	@Override
@@ -84,7 +86,7 @@ public class MainApp extends Application {
 	 
 	 
 	 
-	public ListeConditionnement getLesConditionnements() {
+	public ListConditionnement getLesConditionnements() {
 		return lesConditionnements;
 	}
 
@@ -96,11 +98,20 @@ public class MainApp extends Application {
 		this.primaryStage = primaryStage;
 	}
 
-	public ListePraticiens getLesPraticiens() {
-		return lesPraticiens;
+	public ListPraticienWithVisiteur getLesPraticiensWithVisiteur() {
+		return lesPraticiensWithVisiteur;
 	}
+	
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public ListPraticien getLesPraticien() {
+		return lesPraticien;
+	}
+
+	public void setLesPraticien(ListPraticien lesPraticien) {
+		this.lesPraticien = lesPraticien;
 	}
 }

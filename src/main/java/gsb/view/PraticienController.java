@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import gsb.MainApp;
-import gsb.model.Praticien;
+import gsb.model.PraticienWithVisiteur;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -40,15 +40,15 @@ public class PraticienController implements Controller{
 	private TextField nameVisitor;
 	
 	@FXML
-	private TableView<Praticien> tableView;
+	private TableView<PraticienWithVisiteur> tableView;
 	@FXML
-	private TableColumn<Praticien, String> columNom_Praticien;
+	private TableColumn<PraticienWithVisiteur, String> columNom_Praticien;
 	@FXML
-	private TableColumn<Praticien, String> columPrenom_Praticien;
+	private TableColumn<PraticienWithVisiteur, String> columPrenom_Praticien;
 	@FXML
-	private TableColumn<Praticien, String> columNom_visiteur;
+	private TableColumn<PraticienWithVisiteur, String> columNom_visiteur;
 	@FXML
-	private TableColumn<Praticien, String> columPrenom_visiteur;	
+	private TableColumn<PraticienWithVisiteur, String> columPrenom_visiteur;	
 	@FXML
 	private Button buttonCsv;
 	@FXML
@@ -58,7 +58,7 @@ public class PraticienController implements Controller{
 	@FXML
 	private ProgressBar loader; 
 	
-	private ObservableList<Praticien> praticienData = FXCollections.observableArrayList();
+	private ObservableList<PraticienWithVisiteur> praticienData = FXCollections.observableArrayList();
 
     
 	public void setMainApp(MainApp mainApp) {
@@ -87,14 +87,13 @@ public class PraticienController implements Controller{
 			 
 		});
 		
-		
 	}
 
 	
 	public void initData() {
-		List<Praticien> reqHttp = this.mainApp.getLesPraticiens().getListePraticienWithVisiteurName(this.nameVisitor.getText());
+		List<PraticienWithVisiteur> reqHttp = this.mainApp.getLesPraticiensWithVisiteur().getListePraticienWithVisiteurName(this.nameVisitor.getText());
 
-		switch(this.mainApp.getLesPraticiens().getStatus()) {
+		switch(this.mainApp.getLesPraticiensWithVisiteur().getStatus()) {
 		case(416):
 			Alert alert = new Alert(AlertType.INFORMATION);
 	      	alert.setTitle("Erreur valeur");
@@ -120,7 +119,7 @@ public class PraticienController implements Controller{
 	}
 		
 		if (!(reqHttp == null) ){
-			for(Praticien unPra: reqHttp) {
+			for(PraticienWithVisiteur unPra: reqHttp) {
 				
 				this.detailVisit.setText("Detail du visiteur: \n"+
 										  "Nom :" + unPra.getNom_visiteur() + "\n" +
@@ -134,22 +133,12 @@ public class PraticienController implements Controller{
 			this.tableView.getItems().clear();
 		}
 			
-		
-		 
-		
 			this.tableView.setItems(praticienData);
 			
 			this.columNom_Praticien.setCellValueFactory(cellData -> cellData.getValue().getNom_PraticienProperty());
 			this.columPrenom_Praticien.setCellValueFactory(cellData -> cellData.getValue().getPrenom_PraticienProperty());
 
-			
 	}
-		
-	
-		
-		
-	
-	
 	
 	@FXML
 	public void exportCSV() throws IOException {
@@ -181,7 +170,7 @@ public class PraticienController implements Controller{
 		FileWriter csvWriter = new FileWriter(filePath);
 		
 		
-		for (Praticien toto : this.tableView.getItems()) {
+		for (PraticienWithVisiteur toto : this.tableView.getItems()) {
 			csvWriter.append("Nom praticien");
 			csvWriter.append(",");
 		    csvWriter.append(toto.getNom_Praticien());

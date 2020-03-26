@@ -12,24 +12,27 @@ import javax.ws.rs.core.Response;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class ListeConditionnement {
-	
+public class ListPraticien {
+
 	private Client client;
 	private WebTarget target;
 	private Response response;
 	
-	public ListeConditionnement() {
+	public ListPraticien() {
 		
 	}
 	
-	public List<Conditionnement> getListeConditionnementWithVisiteurName(String nameVisiteur) {
-		List<Conditionnement> result= null;
+	public List<Praticien> getListeConditionnementWithVisiteurName(String nameVisiteur) {
+		List<Praticien> result= null;
 		this.client = ClientBuilder.newClient();
-		this.target = client.target("http://127.0.0.1:8000/api/commande/"+nameVisiteur);
-						
+		this.target = client.target("http://127.0.0.1:8000/api/praticien/"+ nameVisiteur +"/hljwm5CCLj");
+		
+		result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Praticien>>() {
+			
+		});
 		switch(this.target.request().get().getStatus()) {
 			case (200):
-				result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Conditionnement>>() {
+				result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Praticien>>() {
 				});
 				break;
 			case(415):
@@ -55,7 +58,6 @@ public class ListeConditionnement {
 		      	break;
 		      	
 		}
-				
 		return result;
 		
 	}

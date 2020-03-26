@@ -21,5 +21,6 @@
         </columns>
       </TableView>
       <TextField fx:id="nameVisitor" layoutX="163.0" layoutY="55.0" />
+      <Button layoutX="444.0" layoutY="55.0" mnemonicParsing="false" onAction="#bonDeCommande" text="Bon de commande" />
    </children>
 </AnchorPane>
