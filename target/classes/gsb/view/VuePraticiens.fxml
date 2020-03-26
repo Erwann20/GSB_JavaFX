@@ -15,7 +15,7 @@
       <Text layoutX="73.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Visiteur: " />
       <TextField fx:id="nameVisitor" layoutX="165.0" layoutY="55.0" />
       <Button fx:id="buttonConfirm" layoutX="348.0" layoutY="55.0" mnemonicParsing="false" text="Rechercher" />
-      <Button fx:id="buttonCsv" layoutX="591.0" layoutY="323.0" mnemonicParsing="false" onAction="#exportCSV" text="export CSV" />
+      <Button fx:id="buttonCsv" layoutX="591.0" layoutY="280.0" mnemonicParsing="false" onAction="#exportCSV" text="export CSV" />
       <TableView fx:id="tableView" layoutX="84.0" layoutY="137.0" prefHeight="207.0" prefWidth="282.0">
         <columns>
           <TableColumn fx:id="columNom_Praticien" prefWidth="110.39999008178711" text="Nom_Praticien" />
@@ -24,6 +24,6 @@
       </TableView>
       <TextArea fx:id="detailVisit" layoutX="506.0" layoutY="24.0" prefHeight="155.0" prefWidth="170.0" />
       <Line endX="12.4000244140625" endY="260.60003662109375" layoutX="438.0" layoutY="137.0" startX="12.400054931640625" startY="-126.60000610351562" />
-      <ProgressBar fx:id="loader" layoutX="473.0" layoutY="355.0" prefWidth="200.0" progress="0.0" />
+      <ProgressBar fx:id="loader" layoutX="473.0" layoutY="334.0" prefWidth="200.0" progress="0.0" />
    </children>
 </AnchorPane>

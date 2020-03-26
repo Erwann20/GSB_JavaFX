@@ -9,33 +9,32 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
-public class ListePraticiens {
+
+public class ListPraticienWithVisiteur {
 	private Client client;
 	private WebTarget target;
 	private Response response;
 	private Integer status;
 	
-	public ListePraticiens() {
+	public ListPraticienWithVisiteur() {
 
 	}
 	
 	public String getPraticiens() {
 			this.client = ClientBuilder.newClient();
-			this.target = client.target("http://127.0.0.1:8000/api/visiteur");
+			this.target = client.target("http://127.0.0.1:8000/api/visiteur/hljwm5CCLj");
 			this.response= target.request().get();
 			String value = response.readEntity(String.class);
 	    	response.close();  	
 		return value;
 	}
 	
-	public List<Praticien> getListePraticien() {
+	public List<PraticienWithVisiteur> getListePraticien() {
 		
 		this.client = ClientBuilder.newClient();
 		this.target = client.target("http://127.0.0.1:8000/api/visiteur");
-		List<Praticien> result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Praticien>>() {
+		List<PraticienWithVisiteur> result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<PraticienWithVisiteur>>() {
 		});
 		
 		return result;
@@ -52,14 +51,14 @@ public class ListePraticiens {
 		return value;
 	}
 	
-	public List<Praticien> getListePraticienWithVisiteurName(String nameVisiteur) {
-		List<Praticien> result= null;
+	public List<PraticienWithVisiteur> getListePraticienWithVisiteurName(String nameVisiteur) {
+		List<PraticienWithVisiteur> result= null;
 		this.client = ClientBuilder.newClient();
-		this.target = client.target("http://127.0.0.1:8000/api/visiteur/"+nameVisiteur);
+		this.target = client.target("http://127.0.0.1:8000/api/visiteur/"+nameVisiteur+"/hljwm5CCLj");
 				
-		switch(this.target.request().get().getStatus()) {
+		switch(this.target.request().get().getStatus()) {	
 			case (200):
-				result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Praticien>>() {
+				result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<PraticienWithVisiteur>>() {
 					
 				});
 				this.status = this.target.request().get().getStatus();
@@ -73,10 +72,8 @@ public class ListePraticiens {
 			case(415):
 				this.status = this.target.request().get().getStatus();
 		      	break;
-		    
 		      	
 		}
-				
 		return result;
 		
 	}

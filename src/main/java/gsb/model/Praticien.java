@@ -1,114 +1,88 @@
 package gsb.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
-@XmlRootElement
 public class Praticien {
-	
-	@JsonProperty("Nom_Praticien")
-	private String Nom_Praticien;
-	private StringProperty Nom_PraticienProperty;
-	
-	@JsonProperty("Prenom_Praticien")
-	private String Prenom_Praticien;
-	private StringProperty Prenom_PraticienProperty;
-	
-	@JsonProperty("Nom_visiteur")
-	private String Nom_visiteur;
-	private StringProperty Nom_visiteurProperty;
-	
-	@JsonProperty("Prenom_visiteur")
-	private String Prenom_visiteur;
-	private StringProperty Prenom_visiteurProperty;
+	@JsonProperty("PRA_NOM")
+	private String nom;
+	@JsonProperty("PRA_PRENOM")
+	private String prenom;
+	@JsonProperty("PRA_ADRESSE")
+	private String adresse;
+	@JsonProperty("PRA_CP")
+	private String cp;
+	@JsonProperty("PRA_VILLE")
+	private String ville;
+	@JsonProperty("PRA_COEFNOTORIETE")
+	private String coeff;
+	@JsonProperty("TYP_LIBELLE")
+	private String libelle;
+	@JsonProperty("TYP_LIEU")
+	private String lieu;
 	
 	public Praticien() {
 		
 	}
-
-	public Praticien(String nom_Praticien, String prenom_Praticien, String nom_visiteur, String prenom_visiteur) {
-		
-		Nom_Praticien = nom_Praticien;
-		Prenom_Praticien = prenom_Praticien;
-		Nom_visiteur = nom_visiteur;
-		Prenom_visiteur = prenom_visiteur;
+	public Praticien(String nom, String prenom, String adresse, String cp, String ville, String coeff, String libelle,
+			String lieu) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.cp = cp;
+		this.ville = ville;
+		this.coeff = coeff;
+		this.libelle = libelle;
+		this.lieu = lieu;
 	}
-
-	public String getNom_Praticien() {
-		return Nom_Praticien;
+	public String getNom() {
+		return nom;
 	}
-
-	public void setNom_Praticien(String nom_Praticien) {
-		Nom_Praticien = nom_Praticien;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
-
-	public String getPrenom_Praticien() {
-		return Prenom_Praticien;
+	public String getPrenom() {
+		return prenom;
 	}
-
-	public void setPrenom_Praticien(String prenom_Praticien) {
-		Prenom_Praticien = prenom_Praticien;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
-
-	public String getNom_visiteur() {
-		return Nom_visiteur;
+	public String getAdresse() {
+		return adresse;
 	}
-
-	public void setNom_visiteur(String nom_visiteur) {
-		Nom_visiteur = nom_visiteur;
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
 	}
-
-	public String getPrenom_visiteur() {
-		return Prenom_visiteur;
+	public String getCp() {
+		return cp;
 	}
-
-	public void setPrenom_visiteur(String prenom_visiteur) {
-		Prenom_visiteur = prenom_visiteur;
+	public void setCp(String cp) {
+		this.cp = cp;
 	}
-	
-	public StringProperty getNom_PraticienProperty() {
-		return new SimpleStringProperty(this.Nom_Praticien);
+	public String getVille() {
+		return ville;
 	}
-
-	public void setNom_PraticienProperty(StringProperty nom_PraticienProperty) {
-		Nom_PraticienProperty = nom_PraticienProperty;
+	public void setVille(String ville) {
+		this.ville = ville;
 	}
-
-	public StringProperty getPrenom_PraticienProperty() {
-		return new SimpleStringProperty(this.Prenom_Praticien);
+	public String getCoeff() {
+		return coeff;
 	}
-
-	public void setPrenom_PraticienProperty(StringProperty prenom_PraticienProperty) {
-		Prenom_PraticienProperty = prenom_PraticienProperty;
+	public void setCoeff(String coeff) {
+		this.coeff = coeff;
 	}
-
-	public StringProperty getNom_visiteurProperty() {
-		return new SimpleStringProperty(this.Nom_visiteur);
+	public String getLibelle() {
+		return libelle;
 	}
-
-	public void setNom_visiteurProperty(StringProperty nom_visiteurProperty) {
-		Nom_visiteurProperty = nom_visiteurProperty;
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
 	}
-
-	public StringProperty getPrenom_visiteurProperty() {
-		return new SimpleStringProperty(this.Prenom_visiteur);
+	public String getLieu() {
+		return lieu;
 	}
-
-	public void setPrenom_visiteurProperty(StringProperty prenom_visiteurProperty) {
-		Prenom_visiteurProperty = prenom_visiteurProperty;
-	}
-
-	@Override
-	public String toString() {
-		return "Praticien [Nom_Praticien=" + Nom_Praticien + ", Prenom_Praticien=" + Prenom_Praticien
-				+ ", Nom_visiteur=" + Nom_visiteur + ", Prenom_visiteur=" + Prenom_visiteur + "]\n";
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
 	}
 	
-	
-		
 	
 }
