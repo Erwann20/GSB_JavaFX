@@ -9,6 +9,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import gsb.keyapi.KeyGsbApi;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -17,15 +18,16 @@ public class ListConditionnement {
 	private Client client;
 	private WebTarget target;
 	private Response response;
-	
+	private KeyGsbApi key;
 	public ListConditionnement() {
 		
+		key = new KeyGsbApi();
 	}
 	
 	public List<Conditionnement> getListeConditionnementWithVisiteurName(String nameVisiteur) {
 		List<Conditionnement> result= null;
 		this.client = ClientBuilder.newClient();
-		this.target = client.target("http://127.0.0.1:8000/api/commande/"+nameVisiteur+"/hljwm5CCLj");
+		this.target = client.target("http://127.0.0.1:8000/api/commande/"+nameVisiteur+"/"+this.key.getKey());
 					
 		System.out.print(this.target.request().get().getStatus());
 		
@@ -34,7 +36,7 @@ public class ListConditionnement {
 				result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Conditionnement>>() {
 				});
 				break;
-			case(415):
+			case(434):
 				Alert alert = new Alert(AlertType.INFORMATION);
 		      	alert.setTitle("Erreur valeur");
 		      	alert.setHeaderText("Erreur valeur");
@@ -48,7 +50,7 @@ public class ListConditionnement {
 		      	alert.setContentText("Veuillez saisir une valeur");
 		      	alert.showAndWait();
 		      	break;
-			case(434):
+			case(435):
 				alert = new Alert(AlertType.INFORMATION);
 		      	alert.setTitle("Requête vide");
 		      	alert.setHeaderText("Aucun rapport effectué");

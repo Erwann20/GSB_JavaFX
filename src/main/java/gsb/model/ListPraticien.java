@@ -9,6 +9,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import gsb.keyapi.KeyGsbApi;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -17,15 +18,16 @@ public class ListPraticien {
 	private Client client;
 	private WebTarget target;
 	private Response response;
+	private KeyGsbApi key;
 	
 	public ListPraticien() {
-		
+		key = new KeyGsbApi();
 	}
 	
 	public List<Praticien> getListeConditionnementWithVisiteurName(String nameVisiteur) {
 		List<Praticien> result= null;
 		this.client = ClientBuilder.newClient();
-		this.target = client.target("http://127.0.0.1:8000/api/praticien/"+ nameVisiteur +"/hljwm5CCLj");
+		this.target = client.target("http://127.0.0.1:8000/api/praticien/"+ nameVisiteur +"/"+this.key.getKey());
 		
 		result = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Praticien>>() {
 			
