@@ -27,9 +27,11 @@ import gsb.model.PraticienWithVisiteur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 
 public class ConditionnementController implements Controller {
@@ -60,6 +62,7 @@ public class ConditionnementController implements Controller {
 	
 	@FXML
 	public void initData() {
+		this.tableView.getItems().clear();
 		List<Conditionnement> reqHttp = this.mainApp.getLesConditionnements().getListeConditionnementWithVisiteurName(this.nameVisitor.getText());
 		
 		if (!(reqHttp == null) ){
@@ -68,10 +71,6 @@ public class ConditionnementController implements Controller {
 				this.conditionnementData.add(unPra);
 			}
 		} 
-		else {
-		
-			this.tableView.getItems().clear();
-		}
 			
 			this.tableView.setItems(this.conditionnementData);
 			
@@ -114,21 +113,18 @@ public class ConditionnementController implements Controller {
 		Font font = FontFactory.getFont(FontFactory.HELVETICA, 14, BaseColor.BLACK);
 		Font fontContent = FontFactory.getFont(FontFactory.HELVETICA, 8, BaseColor.BLACK);
 
-//		Chunk title = new Chunk("Bon de commande", font);
 		document.addTitle("Bon de commande");
 		document.add(new Paragraph("Bon de commande", font));
 		document.add(new Paragraph(" "));
+
+		document.add(new Paragraph("Nom Praticien: : " +  this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getNom(), fontContent));
+		document.add(new Paragraph("adresse: " + " " + this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getAdresse()+ ", " 
+									+ this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getVille()  + " " 
+									+ this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getCp(), fontContent));
+		document.add(new Paragraph(" "));
 		
 		for (Conditionnement conditionnement : this.tableView.getItems())  {
-			
-			
-	
-			document.add(new Paragraph("Nom Praticien: : " +  this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getNom(), fontContent));
-			document.add(new Paragraph("adresse: " + " " + this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getAdresse()+ ", " 
-										+ this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getVille()  + " " 
-										+ this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getCp(), fontContent));
-			document.add(new Paragraph(" "));
-
+		
 			document.add(new Paragraph("Nom commerciale: " +  conditionnement.getMed_depotlegale(), fontContent));
 			document.add(new Paragraph(" "));
 			document.add(new Paragraph("Nom commerciale: " +  conditionnement.getMed_depotlegale(), fontContent));
@@ -145,6 +141,12 @@ public class ConditionnementController implements Controller {
 		}
 		
 		document.close();
+		
+		Alert alert = new Alert(AlertType.NONE);
+      	alert.setTitle("Bon de commande sauvegardé");
+      	alert.setHeaderText("Bon de commande sauvegardé");
+      	alert.setContentText("Chemin du fichier: "+ filePath);
+      	alert.showAndWait();
 		
 	}
 	

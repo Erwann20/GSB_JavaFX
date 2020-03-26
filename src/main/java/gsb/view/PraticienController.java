@@ -117,7 +117,7 @@ public class PraticienController implements Controller{
 	      	break;
 	      	
 	}
-		
+		this.tableView.getItems().clear();
 		if (!(reqHttp == null) ){
 			for(PraticienWithVisiteur unPra: reqHttp) {
 				
@@ -130,6 +130,7 @@ public class PraticienController implements Controller{
 			}
 		} else {
 			this.buttonCsv.setVisible(false);
+			this.detailVisit.setText("");
 			this.tableView.getItems().clear();
 		}
 			

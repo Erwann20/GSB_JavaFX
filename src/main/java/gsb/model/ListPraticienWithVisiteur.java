@@ -9,6 +9,8 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import gsb.keyapi.KeyGsbApi;
+
 
 
 public class ListPraticienWithVisiteur {
@@ -16,14 +18,15 @@ public class ListPraticienWithVisiteur {
 	private WebTarget target;
 	private Response response;
 	private Integer status;
-	
+	private KeyGsbApi key;
 	public ListPraticienWithVisiteur() {
+		key = new KeyGsbApi();
 
 	}
 	
 	public String getPraticiens() {
 			this.client = ClientBuilder.newClient();
-			this.target = client.target("http://127.0.0.1:8000/api/visiteur/hljwm5CCLj");
+			this.target = client.target("http://127.0.0.1:8000/api/visiteur/");
 			this.response= target.request().get();
 			String value = response.readEntity(String.class);
 	    	response.close();  	
@@ -54,7 +57,7 @@ public class ListPraticienWithVisiteur {
 	public List<PraticienWithVisiteur> getListePraticienWithVisiteurName(String nameVisiteur) {
 		List<PraticienWithVisiteur> result= null;
 		this.client = ClientBuilder.newClient();
-		this.target = client.target("http://127.0.0.1:8000/api/visiteur/"+nameVisiteur+"/hljwm5CCLj");
+		this.target = client.target("http://127.0.0.1:8000/api/visiteur/"+nameVisiteur+"/"+this.key.getKey());
 				
 		switch(this.target.request().get().getStatus()) {	
 			case (200):
