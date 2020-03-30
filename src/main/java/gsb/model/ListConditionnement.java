@@ -41,21 +41,21 @@ public class ListConditionnement {
 		      	alert.setTitle("Erreur valeur");
 		      	alert.setHeaderText("Erreur valeur");
 		      	alert.setContentText("Le nom du praticien ("+ nameVisiteur + ") n'existe pas");
-		      	alert.showAndWait();
+		      	alert.show();
 		      	break;
 			case(500):
 				alert = new Alert(AlertType.INFORMATION);
 		      	alert.setTitle("Erreur saisie");
 		      	alert.setHeaderText("Erreur saisie");
 		      	alert.setContentText("Veuillez saisir une valeur");
-		      	alert.showAndWait();
+		      	alert.show();
 		      	break;
 			case(435):
 				alert = new Alert(AlertType.INFORMATION);
 		      	alert.setTitle("Requête vide");
 		      	alert.setHeaderText("Aucun rapport effectué");
 		      	alert.setContentText("Aucun rapport effectué à ce praticien");
-		      	alert.showAndWait();
+		      	alert.show();
 		      	break;
 		      	
 		}

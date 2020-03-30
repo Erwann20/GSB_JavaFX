@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gsb.view.AboutController">
+   <children>
+      <Text layoutX="673.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A Propos">
+         <font>
+            <Font name="Microsoft JhengHei Light" size="67.0" />
+         </font>
+      </Text>
+      <Text layoutX="326.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GSB est un laboratoire pharmaceutique qui est principalement réalisée par les visiteurs médicaux. En effet, un médicament remboursé par la sécurité sociale n’est jamais vendu directementau consommateur mais prescrit au patient par son médecin. Toute communication publicitaire sur les médicaments remboursés est d'ailleurs interdite par la loi. Ilest donc important, pour l’industrie pharmaceutique, de promouvoir ses produits directement auprèsdes praticiens." textAlignment="CENTER" wrappingWidth="973.47216796875">
+         <font>
+            <Font name="Microsoft JhengHei Light" size="22.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="185.0" fitWidth="393.0" layoutX="664.0" layoutY="607.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resource/logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

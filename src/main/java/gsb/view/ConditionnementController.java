@@ -24,15 +24,22 @@ import gsb.MainApp;
 import gsb.model.Conditionnement;
 import gsb.model.Praticien;
 import gsb.model.PraticienWithVisiteur;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 public class ConditionnementController implements Controller {
 	
@@ -51,6 +58,10 @@ public class ConditionnementController implements Controller {
 	private TableColumn<Conditionnement, String> columNb_boite_a_commander;
 	@FXML
 	private TableColumn<Conditionnement, String> columMedicament_qte;	
+	@FXML
+	private Button buttonConfirm; 
+	@FXML
+	private ProgressBar loader;
 	
 	private ObservableList<Conditionnement> conditionnementData = FXCollections.observableArrayList();
 
@@ -58,6 +69,28 @@ public class ConditionnementController implements Controller {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		
+		this.buttonConfirm.setOnAction((ActionEvent e) -> {
+			this.loader.setVisible(true);
+			Timeline task = new Timeline(
+				        new KeyFrame(
+				                Duration.ZERO,       
+				                new KeyValue(this.loader.progressProperty(), 0)
+				        ),
+				        new KeyFrame(
+				                Duration.seconds(2), 
+				                new KeyValue(this.loader.progressProperty(), 1)
+				        )
+					  );  
+			  task.setOnFinished(event -> {
+				  this.loader.setVisible(false);
+				  initData();
+			  });
+			  
+			  task.playFromStart();
+			  
+			  
+			 
+		});
 	}
 	
 	@FXML
@@ -117,8 +150,8 @@ public class ConditionnementController implements Controller {
 		document.add(new Paragraph("Bon de commande", font));
 		document.add(new Paragraph(" "));
 
-		document.add(new Paragraph("Nom Praticien: : " +  this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getNom(), fontContent));
-		document.add(new Paragraph("adresse: " + " " + this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getAdresse()+ ", " 
+		document.add(new Paragraph("Nom: " +  this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getNom(), fontContent));
+		document.add(new Paragraph("Adresse: " + " " + this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getAdresse()+ ", " 
 									+ this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getVille()  + " " 
 									+ this.mainApp.getLesPraticien().getListeConditionnementWithVisiteurName(this.nameVisitor.getText()).get(0).getCp(), fontContent));
 		document.add(new Paragraph(" "));
@@ -142,7 +175,7 @@ public class ConditionnementController implements Controller {
 		
 		document.close();
 		
-		Alert alert = new Alert(AlertType.NONE);
+		Alert alert = new Alert(AlertType.INFORMATION);
       	alert.setTitle("Bon de commande sauvegardé");
       	alert.setHeaderText("Bon de commande sauvegardé");
       	alert.setContentText("Chemin du fichier: "+ filePath);
