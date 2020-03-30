@@ -1,5 +1,6 @@
 package gsb.view;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,11 +17,14 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -54,7 +58,7 @@ public class PraticienController implements Controller{
 	@FXML
 	private Button buttonConfirm;
 	@FXML
-	private TextArea detailVisit; 
+	private Text detailVisit; 
 	@FXML
 	private ProgressBar loader; 
 	
@@ -69,7 +73,8 @@ public class PraticienController implements Controller{
 		
 	
 		this.buttonConfirm.setOnAction((ActionEvent e) -> {
-			  Timeline task = new Timeline(
+			this.loader.setVisible(true);
+			Timeline task = new Timeline(
 				        new KeyFrame(
 				                Duration.ZERO,       
 				                new KeyValue(this.loader.progressProperty(), 0)
@@ -80,10 +85,13 @@ public class PraticienController implements Controller{
 				        )
 					  );  
 			  task.setOnFinished(event -> {
+				  this.loader.setVisible(false);
 				  initData();
 			  });
 			  
 			  task.playFromStart();
+			  
+			  
 			 
 		});
 		
@@ -121,9 +129,9 @@ public class PraticienController implements Controller{
 		if (!(reqHttp == null) ){
 			for(PraticienWithVisiteur unPra: reqHttp) {
 				
-				this.detailVisit.setText("Detail du visiteur: \n"+
-										  "Nom :" + unPra.getNom_visiteur() + "\n" +
-										  "Prenom :" + unPra.getPrenom_visiteur());
+				this.detailVisit.setText("Liste des praticiens conçernant le visiteur: "+ unPra.getNom_visiteur() + " "
+											+ unPra.getPrenom_visiteur()+ ":");
+				
 				this.praticienData.add(unPra);
 				this.buttonCsv.setVisible(true);
 				
@@ -138,7 +146,7 @@ public class PraticienController implements Controller{
 			
 			this.columNom_Praticien.setCellValueFactory(cellData -> cellData.getValue().getNom_PraticienProperty());
 			this.columPrenom_Praticien.setCellValueFactory(cellData -> cellData.getValue().getPrenom_PraticienProperty());
-
+			
 	}
 	
 	@FXML

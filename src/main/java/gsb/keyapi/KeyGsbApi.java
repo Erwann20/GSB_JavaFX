@@ -2,7 +2,7 @@ package gsb.keyapi;
 
 public class KeyGsbApi {
 	
-	private String key = "hljwm5CCLj";
+	private String key = "fze564f65e";
 
 	public String getKey() {
 		return key;

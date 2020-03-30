@@ -35,11 +35,12 @@ public class MainApp extends Application {
 		
 		 this.primaryStage = primaryStage;
 	     this.primaryStage.setTitle(TITRE);
+	     this.primaryStage.setResizable(false);
 	     this.initRootLayout();
 		
 	}
 	
-	 private void initRootLayout() {
+	 public void initRootLayout() {
 	        try {
 	            // Charge la vue racine à partir du fichier fxml.
 	            FXMLLoader loader = new FXMLLoader();

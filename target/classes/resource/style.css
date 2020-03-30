@@ -1,0 +1,66 @@
+
+.nav {
+	-fx-background-color: linear-gradient(to right, #19225c,#243187);
+}
+
+
+.nav-button {
+	-fx-background-color: linear-gradient(to right, #19225c,#243187);
+	-fx-text-fill: white;
+}
+
+.nav-button:hover {
+	-fx-background-color: #243187;
+	-fx-text-fill: white;
+}
+
+
+
+.background{
+	-fx-background-color: linear-gradient(to right, #404b8f,#5c66a8);
+	
+}
+
+.background-achor {
+	-fx-background-color: linear-gradient(to right, #dee1f7,#ffffff);
+}
+
+.text-view {
+	-fx-alignment:center;
+	-fx-background-radius:25 25 25 25;
+	-fx-border-radius:25 25 25 25;
+	-fx-border-color: linear-gradient(to right, #404b8f,#5c66a8);
+ 	
+}
+
+.button-primary {
+	-fx-text-fill: white;
+	
+	-fx-background-color: linear-gradient(to right, #404b8f,#5c66a8);
+}
+
+
+.progress-bar > .track {
+  -fx-text-box-border: white;
+  -fx-control-inner-background: #404b8f;
+}
+
+.table-view {
+	-fx-background-color: linear-gradient(to right, #404b8f,#5c66a8);
+}
+
+.table-view .column-header  {
+	-fx-background-color: linear-gradient(to right, #404b8f,#5c66a8);
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+
+.table-column {
+	
+}
